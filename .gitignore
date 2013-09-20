@@ -1,0 +1,13 @@
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
+build/*
+cudd-2.5.0/*
+Debug/*
+Release/*
+guide.ps
+*.lib
+*.pdb
+*~
