@@ -5,7 +5,6 @@
 
 class Basic : public ::testing::Test {
 protected:
-    S
     Basic() {}
     virtual ~Basic() {}
     virtual void SetUp() {}

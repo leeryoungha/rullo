@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rule tag="example1">
+  <rhs>
+    <and>
+     
+    </and>
+  </rhs>
+  <lhs>
+    
+  </lhs>
+</rule>

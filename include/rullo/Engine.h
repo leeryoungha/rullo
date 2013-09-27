@@ -2,14 +2,20 @@
 #define RULLO_ENGINE_H
 
 #include <string>
+#include <set>
 #include <boost/utility.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace rullo {
+
+    class Fact;
+
     class Engine : boost::noncopyable {
     public:
         Engine();        
         ~Engine();
-        void importRule(const std::string& iFileName);
+        unsigned int addRule(const std::string& iFileName);
+        void addFact(const std::string& iFileName);
         unsigned id() const {
             return id_;
         }
@@ -17,6 +23,7 @@ namespace rullo {
         static unsigned GetId();
         static unsigned CurrentId;
         unsigned id_;
+        std::set< boost::shared_ptr<Fact> > facts_;
     };
 }
 

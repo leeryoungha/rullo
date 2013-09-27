@@ -2,10 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 PROJECT(rullo)
 
-cmake_minimum_required(VERSION 2.8)
-
 IF(WIN32)
-                add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+                add_definitions(-D_CRT_SECURE_NO_WARNINGS -DWIN_MVC)
 ENDIF(WIN32)
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
@@ -23,12 +21,26 @@ UNSET(Boost_LIBRARY_DIRS CACHE)
 FIND_PACKAGE(Boost REQUIRED COMPONENTS thread )
 INCLUDE_DIRECTORIES(AFTER SYSTEM  ${Boost_INCLUDE_DIR})
 
+
+###########################################################
+# CLIPS
+###########################################################
+SET(CLIPS_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/clips)
+SET(CLIPS_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/clips)
+FILE(GLOB CLIPS_SRC ${CLIPS_SRC_DIR}/*.c)
+FILE(GLOB CLIPS_HDR ${CLIPS_SRC_DIR}/*.h)
+SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/)
+
+ADD_LIBRARY(clips STATIC ${CLIPS_SRC})
+
+
 ###########################################################
 # RULLO
 ###########################################################
 
+
 SET(RULLO_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
-SET(RULLO_SRC_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/src)
+SET(RULLO_SRC_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/src/rullo)
 FILE(GLOB RULLO_SRC ${RULLO_SRC_DIR}/*.cpp)
 FILE(GLOB RULLO_HDR ${RULLO_INCLUDE_DIR}/*.h)
 
@@ -47,5 +59,5 @@ INCLUDE_DIRECTORIES(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} ${RULLO_INCL
 FILE(GLOB TESTS_CPP ${CMAKE_CURRENT_SOURCE_DIR}/test/src/*.cpp)
 FILE(GLOB TEST_H ${CMAKE_CURRENT_SOURCE_DIR}/test/src/*.h)
 add_executable( test_runner ${TESTS_CPP} ${TEST_H})
-TARGET_LINK_LIBRARIES(test_runner gtest gtest_main ${PROJECT_NAME})
+TARGET_LINK_LIBRARIES(test_runner gtest gtest_main ${PROJECT_NAME}  clips)
 ADD_TEST( test_runner test_runner )

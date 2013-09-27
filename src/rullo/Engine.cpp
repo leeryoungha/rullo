@@ -1,4 +1,5 @@
 #include "rullo/Engine.h"
+#include "rullo/Fact.h"
 
 using namespace rullo;
 
@@ -16,6 +17,10 @@ Engine::Engine():
 Engine::~Engine() {
 }
 
-void Engine::importRule(const std::string& iFileName) {
-    
+unsigned Engine::addRule(const std::string& iFileName) {
+    return 0;
+}
+
+void Engine::addFact(const std::string& iFileName) {
+    facts_.insert(boost::shared_ptr<Fact>(new Fact()));    
 }
