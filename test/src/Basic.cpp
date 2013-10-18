@@ -1,28 +1,28 @@
-#include <gtest/gtest.h>
 #include "rullo/Engine.h"
 
+#define BOOST_TEST_MODULE MyTest
+#include <boost/test/unit_test.hpp>
 #include "Utils.h"
 
-class Basic : public ::testing::Test {
-protected:
-    Basic() {}
-    virtual ~Basic() {}
-    virtual void SetUp() {}
-    virtual void TearDown() {}
-};
 
-TEST_F(Basic, Instantiate) {
+BOOST_AUTO_TEST_CASE(Instantiate)
+{
     CrtCheckMemory memChecker;
-    rullo::Engine myRulloEngine;
+    {
+        rullo::Engine myRulloEngine;
+    }
 }
 
-TEST_F(Basic, Instantiate2) {
+BOOST_AUTO_TEST_CASE(Instantiate2) {
     CrtCheckMemory memChecker; 
     rullo::Engine myRulloEngine;
-    GTEST_ASSERT_EQ(myRulloEngine.id(), 1);
+    BOOST_CHECK(myRulloEngine.id() != 0);
     rullo::Engine myRulloEngine2;
-    GTEST_ASSERT_EQ(myRulloEngine2.id(), 2);
+    BOOST_CHECK(myRulloEngine2.id() != 0);
 }
 
-
-
+BOOST_AUTO_TEST_CASE(AssertFact) {
+    CrtCheckMemory memChecker; 
+    rullo::Engine myRulloEngine;
+    myRulloEngine.addFact();
+}
