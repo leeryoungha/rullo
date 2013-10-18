@@ -15,7 +15,7 @@ namespace rullo {
         Engine();        
         ~Engine();
         unsigned int addRule(const std::string& iFileName);
-        void addFact(const std::string& iFileName);
+        void addFact();
         unsigned id() const {
             return id_;
         }
@@ -23,7 +23,8 @@ namespace rullo {
         static unsigned GetId();
         static unsigned CurrentId;
         unsigned id_;
-        std::set< boost::shared_ptr<Fact> > facts_;
+        //std::set< boost::shared_ptr<Fact> > facts_;
+        void* clipsEnv_;
     };
 }
 
